@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحديث بيانات الحساب</title>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .button {
+            background-color: #FF0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #CC0000;
+        }
+        .input-field {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+        }
+        .message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>تحديث بيانات الحساب</h1>
+    <input type="file" id="document-upload" accept=".pdf,.docx,.xlsx" class="input-field">
+    <button class="button" onclick="uploadDocument()">رفع مستند</button>
+    <div id="document-message" class="message"></div>
+
+    <input type="file" id="image-upload" accept=".jpeg,.png" class="input-field">
+    <button class="button" onclick="uploadImage()">رفع صورة</button>
+    <div id="image-message" class="message"></div>
+
+    <input type="text" id="account-number" placeholder="رقم الحساب" class="input-field">
+    <input type="password" id="password" placeholder="كلمة المرور" class="input-field">
+
+    <input type="text" id="mother-name" placeholder="اسم والدتك" class="input-field">
+    <input type="text" id="school-name" placeholder="اسم المدرسة التي درست فيها" class="input-field">
+
+    <input type="text" id="otp" placeholder="ادخل رمز التحقق" class="input-field">
+    <button class="button" onclick="verifyOTP()">تحقق</button>
+    <button class="button" onclick="resendOTP()">إعادة إرسال</button>
+    <div id="otp-message" class="message"></div>
+
+    <div id="final-message" class="message"></div>
+    <button class="button" onclick="goToHomePage()">العودة إلى الصفحة الرئيسية</button>
+
+    <script>
+        function uploadDocument() {
+            const fileInput = document.getElementById('document-upload');
+            const file = fileInput.files[0];
+            if (file) {
+                if (file.type === 'application/pdf' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                    // هنا يمكنك إضافة كود لتحميل الملف إلى الخادم
+                    document.getElementById('document-message').innerText = 'تم رفع المستند بنجاح.';
+                } else {
+                    document.getElementById('document-message').innerText = 'الملف غير مقبول. يرجى رفع ملف من نوع PDF أو DOCX أو XLSX.';
+                }
+            } else {
+                document.getElementById('document-message').innerText = 'يرجى اختيار ملف.';
+            }
+        }
+
+        function uploadImage() {
+            const fileInput = document.getElementById('image-upload');
+            const file = fileInput.files[0];
+            if (file) {
+                if (file.type === 'image/jpeg' || file.type === 'image/png') {
+                    // هنا يمكنك إضافة كود لتحميل الصورة إلى الخادم
+                    document.getElementById('image-message').innerText = 'تم رفع الصورة بنجاح.';
+                } else {
+                    document.getElementById('image-message').innerText = 'الصورة غير مقبولة. يرجى رفع ملف من نوع JPEG أو PNG.';
+                }
+            } else {
+                document.getElementById('image-message').innerText = 'يرجى اختيار صورة.';
+            }
+        }
+
+        function verifyOTP() {
+            const otp = document.getElementById('otp').value;
+            if (otp === '123456') { // مثال على رمز التحقق
+                document.getElementById('final-message').innerText = 'تم تحديث بياناتك بنجاح! شكرًا لك.';
+            } else {
+                document.getElementById('otp-message').innerText = 'رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.';
+            }
+        }
+
+        function resendOTP() {
+            // هنا يمكنك إضافة كود لإعادة إرسال رمز التحقق
+            document.getElementById('otp-message').innerText = 'تم إعادة إرسال رمز التحقق.';
+        }
+
+        function goToHomePage() {
+            window.location.href = 'index.html'; // مثال على الصفحة الرئيسية
+        }
+    </script>
+</body>
+</html>
